@@ -1,0 +1,17 @@
+# rahasia
+.env
+
+# virtual environment
+.venv/
+
+# cache Python
+__pycache__/
+*.pyc
+
+# log dan output sementara
+logs/
+profiling_output.txt
+
+# file OS/editor
+.DS_Store
+.vscode/
