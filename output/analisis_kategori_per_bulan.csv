@@ -1,0 +1,85 @@
+tahun,bulan,nama_bulan,kategori,transaksi,unit_terjual,total_penjualan
+2025,1,Januari,Elektronik,23,40,9186200.0
+2025,1,Januari,Fashion,33,45,8314400.0
+2025,1,Januari,Olahraga,23,47,6273500.0
+2025,1,Januari,Makanan & Minuman,39,96,2981500.0
+2025,1,Januari,Rumah Tangga,16,40,1979600.0
+2025,1,Januari,Kesehatan & Kecantikan,11,31,905400.0
+2025,1,Januari,Tidak Diketahui,5,16,432000.0
+2025,2,Februari,Elektronik,38,64,13250600.0
+2025,2,Februari,Fashion,40,62,12110700.0
+2025,2,Februari,Olahraga,16,28,3948000.0
+2025,2,Februari,Rumah Tangga,27,48,2969800.0
+2025,2,Februari,Makanan & Minuman,37,115,2274600.0
+2025,2,Februari,Kesehatan & Kecantikan,20,40,1269900.0
+2025,2,Februari,Tidak Diketahui,7,30,810000.0
+2025,3,Maret,Elektronik,34,64,12737300.0
+2025,3,Maret,Fashion,33,52,8868100.0
+2025,3,Maret,Olahraga,23,44,7384000.0
+2025,3,Maret,Rumah Tangga,39,81,4723200.0
+2025,3,Maret,Makanan & Minuman,46,161,2656800.0
+2025,3,Maret,Kesehatan & Kecantikan,18,32,1141200.0
+2025,3,Maret,Tidak Diketahui,5,11,294300.0
+2025,4,April,Elektronik,53,95,21114300.0
+2025,4,April,Fashion,44,63,12069100.0
+2025,4,April,Olahraga,26,55,7535400.0
+2025,4,April,Rumah Tangga,44,97,6284200.0
+2025,4,April,Makanan & Minuman,55,144,3070500.0
+2025,4,April,Kesehatan & Kecantikan,37,73,2613500.0
+2025,4,April,Tidak Diketahui,8,39,1044900.0
+2025,5,Mei,Elektronik,44,68,13901500.0
+2025,5,Mei,Fashion,39,58,12257500.0
+2025,5,Mei,Rumah Tangga,30,85,3750000.0
+2025,5,Mei,Olahraga,16,40,3127000.0
+2025,5,Mei,Makanan & Minuman,33,102,2054700.0
+2025,5,Mei,Kesehatan & Kecantikan,15,41,1332400.0
+2025,5,Mei,Tidak Diketahui,6,21,567000.0
+2025,6,Juni,Fashion,40,62,13959700.0
+2025,6,Juni,Elektronik,40,62,10693000.0
+2025,6,Juni,Rumah Tangga,37,100,4040700.0
+2025,6,Juni,Olahraga,19,42,3445200.0
+2025,6,Juni,Makanan & Minuman,36,114,2872600.0
+2025,6,Juni,Kesehatan & Kecantikan,20,52,1639500.0
+2025,6,Juni,Tidak Diketahui,4,5,135000.0
+2025,7,Juli,Elektronik,51,82,22137700.0
+2025,7,Juli,Fashion,32,51,13395000.0
+2025,7,Juli,Olahraga,36,60,8970500.0
+2025,7,Juli,Rumah Tangga,25,65,2697200.0
+2025,7,Juli,Makanan & Minuman,31,105,2468800.0
+2025,7,Juli,Kesehatan & Kecantikan,30,63,2178900.0
+2025,7,Juli,Tidak Diketahui,5,14,378000.0
+2025,8,Agustus,Elektronik,33,49,11504800.0
+2025,8,Agustus,Fashion,28,44,7383300.0
+2025,8,Agustus,Olahraga,18,33,3048200.0
+2025,8,Agustus,Makanan & Minuman,30,95,2722800.0
+2025,8,Agustus,Rumah Tangga,26,57,2493800.0
+2025,8,Agustus,Kesehatan & Kecantikan,24,46,1337800.0
+2025,8,Agustus,Tidak Diketahui,4,9,243000.0
+2025,9,September,Elektronik,33,56,10124000.0
+2025,9,September,Fashion,24,34,7629300.0
+2025,9,September,Olahraga,16,21,3439000.0
+2025,9,September,Makanan & Minuman,41,122,2641900.0
+2025,9,September,Rumah Tangga,16,62,2459400.0
+2025,9,September,Kesehatan & Kecantikan,19,47,1523900.0
+2025,9,September,Tidak Diketahui,3,12,310000.0
+2025,10,Oktober,Fashion,38,59,12323300.0
+2025,10,Oktober,Elektronik,32,44,9895800.0
+2025,10,Oktober,Rumah Tangga,29,86,4190500.0
+2025,10,Oktober,Olahraga,16,22,2872200.0
+2025,10,Oktober,Kesehatan & Kecantikan,17,42,1190100.0
+2025,10,Oktober,Makanan & Minuman,20,43,1025200.0
+2025,10,Oktober,Tidak Diketahui,6,20,527900.0
+2025,11,November,Elektronik,41,68,12016700.0
+2025,11,November,Fashion,43,60,9566300.0
+2025,11,November,Makanan & Minuman,37,133,3527700.0
+2025,11,November,Rumah Tangga,34,69,2808600.0
+2025,11,November,Olahraga,17,34,2683900.0
+2025,11,November,Kesehatan & Kecantikan,28,76,2241700.0
+2025,11,November,Tidak Diketahui,5,30,788400.0
+2025,12,Desember,Elektronik,62,94,19513600.0
+2025,12,Desember,Fashion,46,70,12310500.0
+2025,12,Desember,Olahraga,37,82,9757300.0
+2025,12,Desember,Rumah Tangga,31,77,4487000.0
+2025,12,Desember,Makanan & Minuman,59,183,3706300.0
+2025,12,Desember,Kesehatan & Kecantikan,31,63,1809600.0
+2025,12,Desember,Tidak Diketahui,9,33,840000.0

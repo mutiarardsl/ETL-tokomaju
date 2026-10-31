@@ -1,0 +1,77 @@
+CB 1: EXTRACT 3 SUMBER + HAPUS DUPLIKAT
+======================================================================
+Database tokomaju_oltp: dibuat
+Database tokomaju_dwh: sudah ada
+Tabel pelanggan di tokomaju_oltp: dimuat dari pelanggan.sql
+Koneksi tokomaju_oltp: OK (PostgreSQL 18.6 on x86_64-windows)
+Koneksi tokomaju_dwh: OK (PostgreSQL 18.6 on x86_64-windows)
+
+======================================================================
+EXTRACT
+======================================================================
+
+--- penjualan.csv (CSV) ---
+Jumlah baris : 2445
+Jumlah kolom : 7 -> id_transaksi, tanggal, id_produk, id_pelanggan, qty, harga_satuan, metode_bayar
+Nilai kosong : id_pelanggan=27
+Contoh 3 baris pertama:
+id_transaksi    tanggal     id_produk    id_pelanggan      qty    harga_satuan  metode_bayar
+--------------  ----------  -----------  --------------  -----  --------------  --------------
+T00001          2025-09-23  P034         C0042              10           18000  QRIS
+T00002          08/12/2025  P032         C0129               2           27000  QRIS
+T00003          2025-11-06  P012         C0074               1          274600  QRIS
+
+--- produk.xlsx (Excel) ---
+Jumlah baris : 43
+Jumlah kolom : 4 -> id_produk, nama_produk, kategori, merek
+Nilai kosong : kategori=1
+Contoh 3 baris pertama:
+id_produk    nama_produk          kategori           merek
+-----------  -------------------  -----------------  -------
+P018         Keripik Tempe 200g   Makanan & Minuman  Sanan
+P037         Botol Minum 1L       Olahraga           Bugar
+P026         Deterjen Cair 800ml  rumah tangga       Wangi
+
+--- pelanggan (tabel PostgreSQL) ---
+Jumlah baris : 180
+Jumlah kolom : 8 -> id_pelanggan, nama, jenis_kelamin, kota, provinsi, telepon, email, tgl_daftar
+Nilai kosong : kota=32, email=16
+Contoh 3 baris pertama:
+id_pelanggan    nama            jenis_kelamin    kota    provinsi    telepon          email                      tgl_daftar
+--------------  --------------  ---------------  ------  ----------  ---------------  -------------------------  ------------
+C0001           Yuni Hidayat    Wanita                   Jawa Timur  (0899) 72837929  yuni.hidayat1@yahoo.co.id  2024-05-31
+C0002           Anisa Hidayat   P                Batu    Jawa Timur  0826-0161-0550   anisa.hidayat2@mail.com    2023-01-27
+C0003           Novi Kurniawan  P                Malang  Jawa Timur  089369579318     novi.kurniawan3@gmail.com  2024-02-13
+
+======================================================================
+TRANSFORM CB 1: HAPUS BARIS DUPLIKAT
+======================================================================
+
+[penjualan] kunci duplikat: id_transaksi
+  Sebelum : 2445 baris
+  Sesudah : 2400 baris
+  Dibuang : 45 baris duplikat
+  Contoh baris duplikat:
+id_transaksi    tanggal     id_produk    id_pelanggan      qty  harga_satuan    metode_bayar
+--------------  ----------  -----------  --------------  -----  --------------  --------------
+T00108          2025-01-05  P016         C0013               1  85000           QRIS
+T00108          2025-01-05  P016         C0013               1  85000           QRIS
+T00226          26/07/2025  P010         C0051               1  Rp225.000       QRIS
+T00226          26/07/2025  P010         C0051               1  Rp225.000       QRIS
+
+[produk] kunci duplikat: id_produk
+  Sebelum : 43 baris
+  Sesudah : 40 baris
+  Dibuang : 3 baris duplikat
+  Contoh baris duplikat:
+id_produk    nama_produk       kategori           merek
+-----------  ----------------  -----------------  ----------
+P013         Sandal Jepit      Fashion            Pantai
+P013         Sandal Jepit      Fashion            Pantai
+P017         Teh Celup isi 25  Makanan & Minuman  Daun Hijau
+P017         Teh Celup isi 25  Makanan & Minuman  Daun Hijau
+
+[pelanggan] kunci duplikat: id_pelanggan
+  Sebelum : 180 baris
+  Sesudah : 180 baris
+  Dibuang : 0 baris duplikat

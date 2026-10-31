@@ -1,0 +1,38 @@
+======================================================================
+REKONSILIASI: DATA MENTAH -> TABEL FAKTA
+======================================================================
+Tahap                               Baris  Total penjualan
+--------------------------------  -------  -----------------
+Data mentah (penjualan.csv)          2445  Rp 469.154.600
+(-) Duplikat id_transaksi             -45  Rp -7.331.400
+(-) Ditolak: data tidak valid         -49  Rp -1.427.800
+(-) Ditolak: tidak ada di master       -9  Rp -1.206.700
+= Hasil di fakta_penjualan (DB)      2342  Rp 459.188.700
+
+Rincian baris yang ditolak:
+Alasan                           Baris
+-----------------------------  -------
+id_pelanggan kosong                 25
+qty negatif atau nol                24
+id_produk tidak ada di master        9
+
+======================================================================
+PEMERIKSAAN OTOMATIS
+======================================================================
+Status    Pemeriksaan                                            Harapan       Aktual
+--------  -------------------------------------------------  -----------  -----------
+LULUS     Baris: mentah = duplikat + ditolak + fakta                2445         2445
+LULUS     Nilai: mentah = duplikat + ditolak + fakta         469.154.600  469.154.600
+LULUS     Jumlah fakta di DB = jumlah yang dikirim pipeline         2342         2342
+LULUS     Total fakta di DB = total yang dikirim pipeline    459.188.700  459.188.700
+LULUS     Baris reject_penjualan di DB                                58           58
+LULUS     Baris dim_waktu di DB                                      365          365
+LULUS     Baris dim_produk di DB                                      40           40
+LULUS     Baris dim_pelanggan di DB                                  180          180
+LULUS     Fakta tanpa dimensi waktu                                    0            0
+LULUS     Fakta tanpa dimensi produk                                   0            0
+LULUS     Fakta tanpa dimensi pelanggan                                0            0
+LULUS     Fakta dengan qty <= 0                                        0            0
+LULUS     Fakta dengan total <> qty x harga                            0            0
+
+HASIL AKHIR: SEMUA PEMERIKSAAN LULUS
