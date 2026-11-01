@@ -23,6 +23,7 @@ CREATE TABLE dim_pelanggan (
     pelanggan_key  INT          GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     id_pelanggan   VARCHAR(20)  NOT NULL UNIQUE,
     pelanggan      VARCHAR(255) NOT NULL,
+    jenis_kelamin  VARCHAR(20)  NOT NULL,
     kota           VARCHAR(100) NOT NULL,
     telepon        VARCHAR(25)
 );

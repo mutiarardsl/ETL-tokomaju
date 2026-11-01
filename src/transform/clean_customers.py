@@ -13,6 +13,17 @@ CITY_MAPPING = {
     "yogyakarta": "Yogyakarta",
 }
 
+GENDER_MAPPING = {
+    "l": "Laki-laki", "laki-laki": "Laki-laki", "pria": "Laki-laki",
+    "p": "Perempuan", "perempuan": "Perempuan", "wanita": "Perempuan",
+}
+
+
+def standardize_gender(val) -> str:
+    if pd.isna(val):
+        return "Tidak Diketahui"
+    return GENDER_MAPPING.get(str(val).strip().lower(), "Tidak Diketahui")
+
 
 def standardize_city(val) -> str:
     if pd.isna(val):
@@ -44,6 +55,7 @@ def clean_customers(df_raw: pd.DataFrame) -> pd.DataFrame:
 
     name_col = "nama" if "nama" in df.columns else "pelanggan"
     df["pelanggan"] = df[name_col].astype(str).str.strip()
+    df["jenis_kelamin"] = df["jenis_kelamin"].map(standardize_gender)
     df["kota"] = df["kota"].map(standardize_city)
     df["telepon"] = df["telepon"].map(standardize_phone) if "telepon" in df.columns else None
-    return df[["id_pelanggan", "pelanggan", "kota", "telepon"]].reset_index(drop=True)
+    return df[["id_pelanggan", "pelanggan", "jenis_kelamin", "kota", "telepon"]].reset_index(drop=True)

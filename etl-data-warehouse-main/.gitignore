@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Environment & Credentials
+.env
+
+# Data local (optional to ignore large files)
+data/processed/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
