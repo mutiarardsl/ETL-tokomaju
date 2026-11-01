@@ -1,0 +1,61 @@
+======================================================================
+DATA SEBELUM DAN SESUDAH TRANSFORM
+======================================================================
+RINGKASAN JUMLAH BARIS (SEBELUM -> SESUDAH TRANSFORM)
+Sumber            Sebelum    Sesudah    Dibuang  Keterangan
+--------------  ---------  ---------  ---------  -----------------------
+penjualan.csv        2445       2351         94  duplikat 45, ditolak 49
+produk.xlsx            43         40          3  duplikat 3
+pelanggan (DB)        180        180          0  duplikat 0
+Total penjualan sebelum: Rp 469.154.600 | sesudah (baris valid): Rp 460.395.400
+Catatan: baris penjualan yang valid masih bisa ditolak saat Load jika produk/pelanggannya tidak ada di master. Angka akhir fakta ada di output/verifikasi.txt.
+
+CONTOH BARIS PENJUALAN: SEBELUM -> SESUDAH
+
+[Tanggal ISO, hari <= 12 (rawan tertukar)]  T00003
+  Sebelum : tanggal='2025-11-06'  qty='1'  harga_satuan='274600'  id_pelanggan='C0074'
+  Sesudah : tanggal='2025-11-06'  qty=1  harga_satuan=274600  total_penjualan=274600  (lolos transform)
+
+[Tanggal hari/bulan/tahun]  T00002
+  Sebelum : tanggal='08/12/2025'  qty='2'  harga_satuan='27000'  id_pelanggan='C0129'
+  Sesudah : tanggal='2025-12-08'  qty=2  harga_satuan=27000  total_penjualan=54000  (lolos transform)
+
+[Tanggal dengan nama bulan]  T00029
+  Sebelum : tanggal='21 Sep 2025'  qty='1'  harga_satuan='19000'  id_pelanggan='C0078'
+  Sesudah : tanggal='2025-09-21'  qty=1  harga_satuan=19000  total_penjualan=19000  (lolos transform)
+
+[Harga memakai 'Rp']  T00009
+  Sebelum : tanggal='21/06/2025'  qty='1'  harga_satuan='Rp85.000'  id_pelanggan='C0076'
+  Sesudah : tanggal='2025-06-21'  qty=1  harga_satuan=85000  total_penjualan=85000  (lolos transform)
+
+[Baris duplikat]  T00108
+  Sebelum : tanggal='2025-01-05'  qty='1'  harga_satuan='85000'  id_pelanggan='C0013'
+  Sesudah : DIHAPUS (id_transaksi sama dengan baris sebelumnya, kemunculan pertama dipertahankan)
+
+[Qty negatif atau nol]  T00027
+  Sebelum : tanggal='2025-06-25'  qty='-2'  harga_satuan='69000'  id_pelanggan='C0130'
+  Sesudah : DITOLAK, alasan: qty negatif atau nol (disimpan di reject_penjualan)
+
+[id_pelanggan kosong]  T00083
+  Sebelum : tanggal='15 Mar 2025'  qty='2'  harga_satuan='Rp129.000'  id_pelanggan=NULL
+  Sesudah : DITOLAK, alasan: id_pelanggan kosong (disimpan di reject_penjualan)
+
+CONTOH PRODUK: KATEGORI SEBELUM -> SESUDAH
+id_produk    kategori sebelum          kategori sesudah
+-----------  ------------------------  ----------------------
+P026         'rumah tangga'            Rumah Tangga
+P023         'Mamin'                   Makanan & Minuman
+P031         'KESEHATAN & KECANTIKAN'  Kesehatan & Kecantikan
+P008         'elektronik '             Elektronik
+P012         'FASHION '                Fashion
+P038         'olahraga'                Olahraga
+P032         NULL                      Tidak Diketahui
+Baris produk duplikat yang dihapus: P013, P024, P017
+
+CONTOH PELANGGAN: SEBELUM -> SESUDAH
+C0001 | kota '' -> 'Tidak Diketahui' | telepon '(0899) 72837929' -> '089972837929' | jenis_kelamin 'Wanita' -> 'Perempuan'
+C0002 | kota 'Batu' -> 'Batu' | telepon '0826-0161-0550' -> '082601610550' | jenis_kelamin 'P' -> 'Perempuan'
+C0003 | kota 'Malang' -> 'Malang' | telepon '089369579318' -> '089369579318' | jenis_kelamin 'P' -> 'Perempuan'
+C0004 | kota 'batu' -> 'Batu' | telepon '+6281283822264' -> '081283822264' | jenis_kelamin 'L' -> 'Laki-laki'
+C0005 | kota 'Surabaya' -> 'Surabaya' | telepon '(0858) 77188413' -> '085877188413' | jenis_kelamin 'P' -> 'Perempuan'
+C0006 | kota 'Bandung' -> 'Bandung' | telepon '6285898319489' -> '085898319489' | jenis_kelamin 'L' -> 'Laki-laki'
