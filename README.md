@@ -15,7 +15,7 @@ pelanggan (DB) --+        (Extract)        (Transform)                   (Load, 
 | Database | Fungsi |
 | --- | --- |
 | `tokomaju_oltp` | Sumber: tabel `pelanggan` (dimuat dari `data/raw/pelanggan.sql`) |
-| `tokomaju_dwh` | Target: `dim_waktu`, `dim_produk`, `dim_pelanggan`, `fakta_penjualan`, `reject_penjualan` |
+| `tokomaju_dwh` | Target: `dim_waktu`, `dim_produk`, `dim_pelanggan`, `dim_metode_bayar`, `fakta_penjualan`, `reject_penjualan` |
 
 ## Menjalankan
 
@@ -44,13 +44,14 @@ Kedua database dibuat otomatis oleh pipeline bila belum ada.
 | `src/extract.py` | Membaca CSV, Excel, dan tabel database |
 | `src/transform/` | `clean_sales`, `clean_products`, `clean_customers`, `build_star_schema` |
 | `src/load.py` | Memuat dimensi, memetakan surrogate key, memuat fakta dan reject |
+| `src/before_after.py` | Ringkasan dan contoh baris sebelum dan sesudah transform, simpan `output/before_after.txt` |
 | `src/verify.py` | Rekonsiliasi baris dan nilai, pemeriksaan integritas, simpan `output/verifikasi.txt` |
 | `src/analytics.py` | Menjalankan query analisis, simpan `output/analisis_kategori_per_bulan.csv` |
 | `tests/` | Unit test untuk tanggal, duplikat, reject, kategori, kota, telepon |
 
 ## Keputusan desain
 
-- Surrogate key: `dim_waktu.waktu_key` (yyyymmdd), `dim_produk.produk_key` dan `dim_pelanggan.pelanggan_key` (IDENTITY). `id_produk` dan `id_pelanggan` tetap disimpan sebagai business key.
+- Surrogate key: `dim_waktu.waktu_key` (yyyymmdd), `dim_produk.produk_key`, `dim_pelanggan.pelanggan_key`, dan `dim_metode_bayar.metode_bayar_key` (IDENTITY). `id_produk` dan `id_pelanggan` tetap disimpan sebagai business key.
 - Tanggal berformat ISO dibaca eksplisit tahun-bulan-hari. Format lain dibaca hari-bulan-tahun (asumsi).
 - Baris yang tidak lolos tidak dibuang diam-diam, tetapi disimpan di `reject_penjualan` beserta alasannya.
 - Kategori produk kosong menjadi `Tidak Diketahui`.

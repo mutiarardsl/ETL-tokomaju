@@ -32,6 +32,14 @@ def parse_tanggal(s: pd.Series) -> pd.Series:
     return iso.fillna(lain)
 
 
+def standardize_payment(val) -> str:
+    """Seragamkan penulisan metode bayar; kosong menjadi 'Tidak Diketahui'."""
+    if val is None or pd.isna(val):
+        return "Tidak Diketahui"
+    v = re.sub(r"\s+", " ", str(val)).strip()
+    return "QRIS" if v.lower() == "qris" else v.title()
+
+
 def clean_currency(val):
     """'Rp85.000' -> 85000.0 ; kosong -> NaN (jangan diam-diam menjadi 0)."""
     if val is None or pd.isna(val):
@@ -95,6 +103,7 @@ def clean_sales(df_raw: pd.DataFrame) -> SalesResult:
     stat["reject_per_alasan"] = reject["alasan"].value_counts().to_dict()
 
     # 3) Kolom turunan
+    bersih["metode_bayar"] = bersih["metode_bayar"].map(standardize_payment)
     bersih["qty"] = bersih["qty"].astype(int)
     bersih["total_penjualan"] = (bersih["qty"] * bersih["harga_satuan"]).round(2)
     stat["n_bersih"] = len(bersih)

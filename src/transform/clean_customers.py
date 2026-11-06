@@ -13,6 +13,7 @@ CITY_MAPPING = {
     "yogyakarta": "Yogyakarta",
 }
 
+
 GENDER_MAPPING = {
     "l": "Laki-laki", "laki-laki": "Laki-laki", "pria": "Laki-laki",
     "p": "Perempuan", "perempuan": "Perempuan", "wanita": "Perempuan",

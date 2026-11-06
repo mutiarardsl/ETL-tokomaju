@@ -63,6 +63,9 @@ def verify(engine: Engine, stat: dict, star: dict) -> bool:
             "SELECT COUNT(*) FROM fakta_penjualan f LEFT JOIN dim_produk d ON d.produk_key=f.produk_key WHERE d.produk_key IS NULL"))),
         ("Fakta tanpa dimensi pelanggan", 0, int(q(
             "SELECT COUNT(*) FROM fakta_penjualan f LEFT JOIN dim_pelanggan d ON d.pelanggan_key=f.pelanggan_key WHERE d.pelanggan_key IS NULL"))),
+        ("Baris dim_metode_bayar di DB", len(star["dim_metode_bayar"]), int(q("SELECT COUNT(*) FROM dim_metode_bayar"))),
+        ("Fakta tanpa dimensi metode bayar", 0, int(q(
+            "SELECT COUNT(*) FROM fakta_penjualan f LEFT JOIN dim_metode_bayar d ON d.metode_bayar_key=f.metode_bayar_key WHERE d.metode_bayar_key IS NULL"))),
         ("Fakta dengan qty <= 0", 0, int(q("SELECT COUNT(*) FROM fakta_penjualan WHERE qty <= 0"))),
         ("Fakta dengan total <> qty x harga", 0, int(q(
             "SELECT COUNT(*) FROM fakta_penjualan WHERE total_penjualan <> qty * harga_satuan"))),
@@ -72,7 +75,7 @@ def verify(engine: Engine, stat: dict, star: dict) -> bool:
     # rep.add("PEMERIKSAAN OTOMATIS")
     # rep.add("=" * 70)
     # hasil = []
-    # semua_lulus = True
+    semua_lulus = True
     # for nama, diharapkan, aktual in cek:
     #     ok = diharapkan == aktual
     #     semua_lulus &= ok
@@ -83,4 +86,4 @@ def verify(engine: Engine, stat: dict, star: dict) -> bool:
     # rep.add("\nHASIL AKHIR: " + ("SEMUA PEMERIKSAAN LULUS" if semua_lulus else "ADA PEMERIKSAAN YANG GAGAL"))
 
     rep.save(OUTPUT_DIR / "verifikasi.txt")
-    #return semua_lulus
+    return semua_lulus

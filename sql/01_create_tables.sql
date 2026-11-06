@@ -28,13 +28,18 @@ CREATE TABLE dim_pelanggan (
     telepon        VARCHAR(25)
 );
 
+CREATE TABLE dim_metode_bayar (
+    metode_bayar_key  INT         GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    metode_bayar      VARCHAR(30) NOT NULL UNIQUE
+);
+
 CREATE TABLE fakta_penjualan (
     fakta_key        BIGINT        GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     id_transaksi     VARCHAR(30)   NOT NULL UNIQUE,
     waktu_key        INT           NOT NULL REFERENCES dim_waktu (waktu_key),
     produk_key       INT           NOT NULL REFERENCES dim_produk (produk_key),
     pelanggan_key    INT           NOT NULL REFERENCES dim_pelanggan (pelanggan_key),
-    metode_bayar     VARCHAR(30),
+    metode_bayar_key INT           NOT NULL REFERENCES dim_metode_bayar (metode_bayar_key),
     qty              INT           NOT NULL CHECK (qty > 0),
     harga_satuan     NUMERIC(15,2) NOT NULL,
     total_penjualan  NUMERIC(15,2) NOT NULL

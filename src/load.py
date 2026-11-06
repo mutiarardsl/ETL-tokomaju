@@ -1,11 +1,11 @@
 import pandas as pd
 from sqlalchemy.engine import Engine
 
-DIM_ORDER = ["dim_waktu", "dim_produk", "dim_pelanggan"]
+DIM_ORDER = ["dim_waktu", "dim_produk", "dim_pelanggan", "dim_metode_bayar"]
 
 KOLOM_FAKTA = [
     "id_transaksi", "waktu_key", "produk_key", "pelanggan_key",
-    "metode_bayar", "qty", "harga_satuan", "total_penjualan",
+    "metode_bayar_key", "qty", "harga_satuan", "total_penjualan",
 ]
 KOLOM_REJECT = [
     "id_transaksi", "tanggal_mentah", "id_produk", "id_pelanggan",
@@ -26,19 +26,25 @@ def attach_surrogate_keys(engine: Engine, fakta_stage: pd.DataFrame):
     dp = pd.read_sql("SELECT produk_key, id_produk FROM dim_produk", engine)
     dc = pd.read_sql("SELECT pelanggan_key, id_pelanggan FROM dim_pelanggan", engine)
 
+    dm = pd.read_sql("SELECT metode_bayar_key, metode_bayar FROM dim_metode_bayar", engine)
+
     f = (fakta_stage
          .merge(dp, on="id_produk", how="left")
-         .merge(dc, on="id_pelanggan", how="left"))
+         .merge(dc, on="id_pelanggan", how="left")
+         .merge(dm, on="metode_bayar", how="left"))
 
     f["alasan"] = None
     f.loc[f["produk_key"].isna(), "alasan"] = "id_produk tidak ada di master"
     f.loc[f["alasan"].isna() & f["pelanggan_key"].isna(), "alasan"] = "id_pelanggan tidak ada di master"
+
+    f.loc[f["alasan"].isna() & f["metode_bayar_key"].isna(), "alasan"] = "metode_bayar tidak ada di master"
 
     reject = f[f["alasan"].notna()].copy()
 
     fakta = f[f["alasan"].isna()].copy()
     fakta["produk_key"] = fakta["produk_key"].astype(int)
     fakta["pelanggan_key"] = fakta["pelanggan_key"].astype(int)
+    fakta["metode_bayar_key"] = fakta["metode_bayar_key"].astype(int)
     return fakta[KOLOM_FAKTA], reject
 
 

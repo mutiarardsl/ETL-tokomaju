@@ -9,8 +9,8 @@ load_dotenv(BASE_DIR / ".env")
 
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = int(os.getenv("DB_PORT", "5432"))
-DB_USER = os.getenv("DB_USER", "etl_user")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "datwar123")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
 DB_SOURCE_NAME = os.getenv("DB_SOURCE_NAME", "tokomaju_oltp")
 DB_TARGET_NAME = os.getenv("DB_TARGET_NAME", "tokomaju_dwh")
 

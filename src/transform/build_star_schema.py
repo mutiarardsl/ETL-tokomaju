@@ -29,6 +29,9 @@ def build_star_schema(
     sehingga fakta baru bisa diberi kunci setelah dimensi dimuat (lihat load.py)."""
     dim_waktu = build_dim_waktu(sales_bersih["tanggal"].min(), sales_bersih["tanggal"].max())
 
+    dim_metode_bayar = (pd.DataFrame({"metode_bayar": sorted(sales_bersih["metode_bayar"].unique())})
+                        .reset_index(drop=True))
+
     fakta_stage = sales_bersih.assign(
         waktu_key=sales_bersih["tanggal"].dt.strftime("%Y%m%d").astype(int)
     )[[
@@ -41,5 +44,6 @@ def build_star_schema(
         "dim_waktu": dim_waktu,
         "dim_produk": df_products,
         "dim_pelanggan": df_customers,
+        "dim_metode_bayar": dim_metode_bayar,
         "fakta_stage": fakta_stage,
     }

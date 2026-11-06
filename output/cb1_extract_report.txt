@@ -1,8 +1,8 @@
 CB 1: EXTRACT 3 SUMBER + HAPUS DUPLIKAT
 ======================================================================
-Database tokomaju_oltp: dibuat
+Database tokomaju_oltp: sudah ada
 Database tokomaju_dwh: sudah ada
-Tabel pelanggan di tokomaju_oltp: dimuat dari pelanggan.sql
+Tabel pelanggan di tokomaju_oltp: sudah berisi data
 Koneksi tokomaju_oltp: OK (PostgreSQL 18.6 on x86_64-windows)
 Koneksi tokomaju_dwh: OK (PostgreSQL 18.6 on x86_64-windows)
 
